@@ -16,19 +16,19 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final questions = const [
-      {
-        'questionText': 'What\'s your favourite colour?',
-        'answers': ['Black', 'Red', 'Green', 'White'],
-      },
-      {
-        'questionText': 'What\'s your favourite animal?',
-        'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
-      },
-      {
-        'questionText': 'Who\'s your favourite instructor?',
-        'answers': ['Tom', 'Phil', 'Jennie', 'Chris'],
-      },
-    ];
+    {
+      'questionText': 'What\'s your favourite colour?',
+      'answers': ['Black', 'Red', 'Green', 'White'],
+    },
+    {
+      'questionText': 'What\'s your favourite animal?',
+      'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
+    },
+    {
+      'questionText': 'Who\'s your favourite instructor?',
+      'answers': ['Tom', 'Phil', 'Jennie', 'Chris'],
+    },
+  ];
 
   var _questionIndex = 0;
 
@@ -38,8 +38,11 @@ class _MyAppState extends State<MyApp> {
     });
     print(_questionIndex);
 
-    if (_questionIndex < questions.length) {  // Perform 'if-check' after changing index value
-       print('We have more questions');
+    if (_questionIndex < questions.length) {
+      // Perform 'if-check' after changing index value
+      print('We have more questions');
+    } else {
+      print('We have no more questions');
     }
   }
 
@@ -50,16 +53,21 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('My First App'),
         ),
-        body: Column(
-          children: [
-            Question(
-              questions[_questionIndex]['questionText'],
-            ),
-            ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
-              return Answer(_answerQuestion, answer); 
-            }).toList()
-          ],
-        ),
+        body: _questionIndex < questions.length
+            ? Column(
+                children: [
+                  Question(
+                    questions[_questionIndex]['questionText'],
+                  ),
+                  ...(questions[_questionIndex]['answers'] as List<String>)
+                      .map((answer) {
+                    return Answer(_answerQuestion, answer);
+                  }).toList()
+                ],
+              )
+            : Center(
+                child: Text('You did it!'),
+              ),
       ),
     ); //MaterialApp is a widget provided by Flutter that helps render widgets as app on screen.
   }
