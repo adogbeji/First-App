@@ -10,9 +10,7 @@ class Answer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container( // Container allows control of width
       width: double.infinity,
-      child: RaisedButton(
-        color: Colors.blue,
-        textColor: Colors.white,
+      child: ElevatedButton(  // No 'style' argument here
         child: Text(answerText),
         onPressed: selectQuestion,
       ),
